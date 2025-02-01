@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for coach in coaches %}
+{% if coach.theme == 0 %}
+<div class="container-fluid full-min d-flex flex-fill px-0 bg-coach" style="background: bottom right / contain no-repeat url('static/coach-alpha/{{ coach.code }}.png');">
+  <div class="container px-4 pt-5">
+    <div class="row h-100 d-flex align-items-start align-items-lg-center">
+      <div class="col-lg-8 pb-5 d-felx flex-column" style="z-index: 1;">
+        <p class="text-muted mb-1">Cтаж работы — c {{ coach.term }}</h4>
+        <h4 class="text-blue fw-semibold">{{ coach.organization }}</strong>
+        <h1 class="fw-semibold display-1 text-body-emphasis mb-3">{{ coach.name }}</h1>
+        <ul class="">
+          {% for achievement in coach.achievements %}
+          <li><p class="lead">{{ achievement }}</p></li>
+          {% endfor %}      
+        </ul>
+        <div class="py-5">
+          {% if coach.tel %}
+          <a href="tel:{{ coach.tel }}" class="btn btn-blue m-2">{{ coach.tel }}</a>
+          {% endif %}
+          {% for addresses in coach.addresses %}
+          <a class="btn btn-outline-dark m-2" aria-disabled="true">{{ addresses }}</a>
+          {% endfor %}  
+        </div>
+      </div>  
+      <div class="col-lg-4 align-self-stretch img-coach" style="z-index: 0;">
+        <div class="h-100" style="background: bottom / contain no-repeat url('static/coach0/{{ coach.code }}.png');"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="container-fluid full-min d-flex flex-fill px-0 text-light bg-dark-coach" style="background: bottom right / contain no-repeat url('static/coach-alpha/{{ coach.code }}.png'); background-color: #131112;">
+  <div class="container px-4 pt-5">
+    <div class="row h-100 d-flex align-items-start align-items-lg-center">
+      <div class="col-lg-4 align-self-stretch img-coach" style="z-index: 0;">
+        <div class="h-100" style="background: bottom / contain no-repeat url('static/coach0/{{ coach.code }}.png');"></div>
+      </div>
+      <div class="col-lg-8 pb-5 d-felx flex-column" style="z-index: 1;">
+        <p class="text-light text-muted mb-1">Cтаж работы — c {{ coach.term }}</p>
+        <h4 class="text-blue fw-semibold" style="color: #5A6DF5;">{{ coach.organization }}</h4>
+        <h1 class="text-light fw-semibold display-1 text-body-emphasis mb-3">{{ coach.name }}</h1>
+        <ul class="">
+          {% for achievement in coach.achievements %}
+          <li><p class="lead">{{ achievement }}</p></li>
+          {% endfor %} 
+        </ul>
+        <div class="py-5">
+          {% if coach.tel %}
+          <a href="tel:{{ coach.tel }}" class="btn btn-blue m-2" style="background: #5A6DF5;">{{ coach.tel }}</a>
+          {% endif %}
+          {% for addresses in coach.addresses %}
+          <a class="btn btn-outline-light m-2" aria-disabled="true">{{ addresses }}</a>
+          {% endfor %}  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endfor %}
+
+{% endblock %}

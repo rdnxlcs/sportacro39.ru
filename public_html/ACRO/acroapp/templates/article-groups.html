@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="padding px-3">
+  <main class="container py-5">
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <article class="blog-post mb-5">
+            <h2 class="">
+            Группы подготовки
+            </h2>
+            <hr>
+            <p><strong>Группа "Малыш"</strong></p>
+            <p>Данный формат создан для детей в возрасте от 3 до 5 лет.<br>Занятия проводятся в игровой форме, что делает их интересными и увлекательными для малышей.<br>В программу включены общая физическая подготовка, развитие гибкости и изучение основных акробатических индивидуальных элементов.</p>
+            <p>Список тренеров</p>
+            <ul>
+                <li>Гончарова София Александровна</li>
+                <li>Далечин Александр Алексеевич</li>
+                <li>Кантонистова Екатерина Витальевна</li>
+                <li>Пустобаева Софья Алексеевна</li>
+            </ul>
+
+            <p><strong>Группа начальной подготовки</strong></p>
+            <p>По достижении пятилетнего возраста ребенок переводится в группу «Начальная подготовка», где продолжается развитие навыков и изучение более сложных акробатических элементов.<br>При достаточном уровне подготовки и интересе к изучению не только индивидуальных, но и парных или групповых элементов, мы предлагаем вам группу «Парно-групповая акробатика».</p>
+            <p>Список тренеров</p>
+            <ul>
+                <li>Овчинникова Ангелина Олеговна</li>
+                <li>Гончарова София Александровна</li>
+                <li>Петрунин Владислав Сергеевич/li>
+                <li>Кулинич Никита Владимирович</li>
+                <li>Далечин Александр Алексеевич</li>
+                <li>Кантонистова Екатерина Витальевна</li>
+                <li>Гончаров Дмитрий Александрович</li>
+                <li>Кузенкова Вероника Леонидовна</li>
+            </ul>
+
+            <p><strong>Парно-групповая акробатика</strong></p>
+            <p>Тренировочная программа данной группы предоставит возможность попробовать себя на пути к профессиональному спорту. В процессе занятий, помимо индивидуальных элементов, также включаются такие компоненты, как построение пирамид, подброски, прыжки и другие акробатические элементы.</p>
+            <p>Список тренеров</p>
+            <ul>
+                <li>Овчинникова Ангелина Олеговна</li>
+            </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="position-sticky" style="top: 80px;">
+          <a href="/ms" class="text-decoration-none">
+            <div class="p-4 mb-3 bg-blue rounded">
+              <h4 class="text-light">Мастера спорта</h4>
+              <p class="text-light mb-0">Актуальный список мастеров спорта России по спортивной акробатике в
+                калининградской области</p>
+            </div>
+          </a>
+          <div>
+            <h3 class="">Недавние новости</h3>
+            <ul class="list-unstyled">
+              {% for post in last %}
+              <li>
+                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none"
+                  href="#">
+                  {% for photo in post.photos %}
+                  {% if forloop.counter == 1 %}
+                  <div class="w-100 rounded" style="height: 96px; background: center / cover url('{{ photo }}');"></div>
+                  {% endif %}
+                  {% endfor %}
+                  {% if post.cover %}
+                  <div class="w-100 rounded" style="height: 96px; background: center / cover url('{{ post.cover }}');">
+                  </div>
+                  {% endif %}
+                  <div class="col-lg-8">
+                    <h6 class="mb-0">{{ post.title }}</h6>
+                    <small class="text-muted">{{ post.date|date:"d.m.Y" }}</small>
+                  </div>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="p-4">
+            <h4 class="">Все статьи</h4>
+            <ol class="list-unstyled mb-0">
+              {% for article in articles %}
+              <li class="mb-3"><a class="text-blue" href="/article/{{ article.art }}">{{ article.title }}</a></li>
+              {% endfor %}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  document.querySelectorAll('.post-text').forEach(element => {
+    element.innerHTML = element.innerHTML.replace(/&lt;br&gt;/g, '<br>');
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Создаем массив промисов для каждого изображения
+    const imagePromises = [];
+
+    // Для каждого изображения с классом .media
+    document.querySelectorAll('.media').forEach(element => {
+      const imagePromise = new Promise((resolve, reject) => {
+        element.onload = function () {
+          const w = element.naturalWidth;
+          const h = element.naturalHeight;
+          console.log(w, h);
+
+          if (w > h) {
+            element.classList.add('photo-wide');
+          } else if (w <= h) {
+            element.classList.add('photo-tall');
+          }
+          resolve();  // Завершаем промис, когда изображение загружено
+        };
+
+        element.onerror = function () {
+          reject('Ошибка загрузки изображения');  // Обработка ошибок
+        };
+
+        // Если изображение уже загружено, сразу вызываем onload
+        if (element.complete) {
+          element.onload();
+        }
+      });
+
+      // Добавляем промис в массив
+      imagePromises.push(imagePromise);
+    });
+
+    // Ждем, пока все изображения загрузятся и получат классы
+    Promise.all(imagePromises).then(() => {
+      // После того как все изображения получили свои классы, выполняем сортировку
+      const photoGrids = document.querySelectorAll('.photo-grid');
+
+      photoGrids.forEach(photoGrid => {
+        const photos = Array.from(photoGrid.querySelectorAll('.media'));
+
+        // Разделяем фотографии по классам
+        const widePhotos = photos.filter(photo => photo.classList.contains('photo-wide'));
+        const tallPhotos = photos.filter(photo => photo.classList.contains('photo-tall'));
+        const otherPhotos = photos.filter(photo => !photo.classList.contains('photo-wide') && !photo.classList.contains('photo-tall'));
+
+        // Очистка контейнера перед добавлением отсортированных элементов
+        photoGrid.innerHTML = '';
+
+        // Добавляем сначала фото с классом .photo-wide, затем .photo-tall и затем остальные
+        widePhotos.forEach(photo => photoGrid.appendChild(photo));
+        tallPhotos.forEach(photo => photoGrid.appendChild(photo));
+        otherPhotos.forEach(photo => photoGrid.appendChild(photo));
+      });
+
+      console.log('Все изображения отсортированы');
+    }).catch((error) => {
+      console.error(error);
+    });
+  });
+</script>
+{% endblock %}

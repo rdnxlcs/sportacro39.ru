@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid padding" style="position: relative; z-index: 1;">
+  <div class="h-100">
+    <div class="h-100 d-flex flex-column">
+      <div class="container-fluid pt-5 ">
+        <div class="container">
+          <h1 class="display-0 fw-semibold">Календарь соревнований</h1>
+        </div>
+      </div>
+      <div class="container mx-auto row g-3 align-content-stretch">
+        <div class="col">
+          {% for compit in competitions %}
+          <div class="rounded my-3 row g-0 bg-light overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-blue">{{ compit.city }}</strong>
+              <h3 class="mb-0">{{ compit.name }}</h3>
+              <div class="mb-1 text-muted">{{ compit.date }}</div>
+              <p class="card-text mb-auto">{{ compit.text }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col">
+          <div class="mb-3" style="position: sticky!important; top: 80px;">
+            {% for compit in region_competitions %}
+            <div class="rounded my-3 row g-0 bg-light overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-blue">{{ compit.city }}</strong>
+                <h3 class="mb-0">{{ compit.name }}</h3>
+                <div class="mb-1 text-muted">{{ compit.date }}</div>
+                <p class="card-text mb-auto">{{ compit.text }}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="full fixed-top" style="z-index: 0;">
+  <div class="h-100" style="background: right / contain no-repeat url('static/bg.png');">
+
+  </div>
+</div>
+{% endblock %}

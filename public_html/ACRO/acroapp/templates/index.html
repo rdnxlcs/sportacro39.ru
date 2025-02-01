@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid d-flex align-items-center full-min bg-dark">
+  <div class="px-3 px-lg-5 py-5 h-100">
+    <div class="row row-cols-1 row-cols-lg-3 h-100">
+      <div class="col py-3 collapse-bg d-flex flex-column justify-content-center" style="z-index: 1;">
+        <div class="h-100"></div>
+        <div class="d-flex mb-4">
+          <a href="tel:89097779051" class="btn btn-light">Записаться на тренировку</a>
+        </div>
+        <h1 class="display-0 text-light lh-1 fw-semibold mb-4 text-nowrap">Спортивная<br>акробатика в<br>Калининграде
+        </h1>
+        <div class="h-100"></div>
+        <div class="">
+          <p class="text-light text-muted m-0">Telegram<br>WhatsApp<br>Viber</p>
+          <a href="tel:89052422267" type="tel" class="text-light mb-3"><p class="text-light lead">+7 (905) 242-22-67</p></a>
+        </div>
+      </div>
+      <div class="col" style="z-index: 0;">
+        <div class="h-100 w-100 rounded" style="background: top / cover url('static/main.png');">
+
+        </div>
+      </div>
+      <div class="col py-3 d-flex flex-column justify-content-center">
+        <p class="text-light text-muted">СЛЕДИТЕ ЗА НАМИ</p>
+        <div>
+          <div class="border-light mb-5 text-light d-flex flex-column">
+            <div class="d-flex justify-content-between">
+              <a class="text-decoration-none" href="https://www.youtube.com/@sports_acro39" target="_blank"><h1 class="text-light">YouTube</h1></a>
+              <a class="text-decoration-none" href="https://www.youtube.com/@sports_acro39" target="_blank"><h1 class="text-light"><i class="bi bi-arrow-right"></i></h1></a>
+            </div>
+            <p class="lead col-10">Смотрите все выступления наших спортсменов</p>
+          </div>
+          <div class="border-light mb-5 text-light d-flex flex-column">
+            <div class="d-flex justify-content-between">
+              <a class="text-decoration-none" href="https://vk.com/kenig_acro" target="_blank"><h1 class="text-light">VK</h1></a>
+              <a class="text-decoration-none" href="https://vk.com/kenig_acro" target="_blank"><h1 class="text-light"><i class="bi bi-arrow-right"></i></h1></a>
+            </div>
+            <p class="lead col-10">Следите за тренировочным процессом и важной информацией</p>
+          </div>
+          <div class="border-light text-light d-flex flex-column">
+            <div class="d-flex justify-content-between">
+              <a class="text-decoration-none" href="https://t.me/Kaliningrad_sportsacro39" target="_blank"><h1 class="text-light">Telegram</h1></a>
+              <a class="text-decoration-none" href="https://t.me/Kaliningrad_sportsacro39" target="_blank"><h1 class="text-light"><i class="bi bi-arrow-right"></i></h1></a>
+            </div>
+            <p class="lead col-10">Присоединяйтесь к нам во всех социальных сетях</p>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container padding">
+  <div class="pt-5 px-3">
+    <div class="text-center w-100">
+      <h1 class="fw-semibold">Наши тренеры</h1>
+    </div>
+    <div class="py-5">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+        {% for c in main_coaches %}
+        <div class="d-flex col flex-column align-items-center justify-content-start text-center">
+          <div class="rounded-circle" style="background: top / cover url('static/coach/{{ c.code }}.png'); height: 256px; width: 256px;">
+          </div>
+          <div class="py-2">
+            <h5 class="coach">{{ c.name }}</h5>
+            <p class="text-muted">{{ c.organization }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="collapse row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 pt-4" id="demo">
+        {% for c in coaches %}
+        <div class="d-flex col flex-column align-items-center justify-content-center text-center">
+          <div class="rounded-circle" style="background: top / cover url('static/coach/{{ c.code }}.png'); height: 256px; width: 256px;">
+          </div>
+          <div class="py-2">
+            <h5 class="coach">{{ c.name }}</h5>
+            <p class="text-muted">{{ c.organization }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="text-center w-100">
+      <a class="text-muted" data-bs-toggle="collapse" data-bs-target="#demo">Смотреть ещё</a>
+    </div>
+  </div>
+</div>
+<div class="container-fluid px-0">
+  <div class="container">
+    <div class="pb-5 px-3 h-100">
+      <h1 class="display-0 fw-semibold lh-1 mb-5 bg-clip text-nowrap col-lg-7 text-nowrap">Записаться на<br><span>тренировку</span></h1>
+      <div class="row g-3">
+        <div class="col-12 col-lg-7">
+          <div class="h-100 w-100 rounded" style="background: center / cover url('static/tr.jpg'); min-height: 256px;">
+          </div>
+        </div>
+        <div class="col-12 col-lg-5 py-3 d-flex flex-column justify-content-center">
+          <div class="border-bottom mb-5 d-flex flex-column">
+            <div class="d-flex justify-content-between">
+              <a href="/article/groups" class="text-decoration-none"><h1>Группа "Малыш"</h1></a>
+              <a href="/article/groups" class="text-decoration-none"><h1 class=""><i class="bi bi-arrow-right"></i></h1></a>
+            </div>
+            <p class="lead col-10">от 3 до 5 лет</p>
+          </div>
+          <div class="border-bottom mb-5 d-flex flex-column">
+            <div class="d-flex justify-content-between">
+              <a href="/article/groups" class="text-decoration-none"><h1>Начальная подготовка</h1></a>
+              <a href="/article/groups" class="text-decoration-none"><h1 class=""><i class="bi bi-arrow-right"></i></h1></a>
+            </div>
+            <p class="lead col-10">от 5 до 8 лет</p>
+          </div>
+          <div class="border-bottom d-flex flex-column">
+            <div class="d-flex justify-content-between">
+              <a href="/article/groups" class="text-decoration-none"><h1>Парно-групповая акробатика</h1></a>
+              <a href="/article/groups" class="text-decoration-none"><h1 class=""><i class="bi bi-arrow-right"></i></h1></a>
+            </div>
+            <p class="lead col-10">от 6 лет</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid padding">
+  <div class="h-100 pb-5 mb-5">
+    <div class="container">
+      <h1 class="display-0 fw-semibold">Следите за нами</h1>
+      <div class="row g-3 d-flex flex-fill">
+        <div class="col-lg-6">
+          <div class="p-4 p-md-5 text-light bg-blue rounded h-100">
+            <div class="px-0 h-100 d-flex flex-column">
+              <h1 class="display-4 fw-semibold text-light">Как выбрать тренера для ребёнка?</h1>
+              <p class="lead my-3">У многих родителей возникает вопрос о том как выбрать тренера для ребенка. В настоящее время спортивные занятия являются одной из важных областей для полноценного развития личности.</p>
+              <div class="h-100"></div>
+              <p class="lead mb-0"><a href="/article/coach" class="fw-semibold text-light">Читать далее...</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="pb-3">
+            <div class="rounded row g-0 bg-light overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-blue">VK</strong>
+                <h3 class="mb-0 lines-1">{{ rec.title }}</h3>
+                <div class="mb-1 text-muted">{{ rec.date|date:"d.m.Y" }}</div>
+                <p class="card-text mb-auto lines-2">{{ rec.text|safe }}</p>
+                <a class="text-blue" href="https://vk.com/kenig_acro" target="_blank">
+                  Перейти в VK
+                </a>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <div
+                  style="background: center / cover url('{{ rec.cover }}'); height: 250px; width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">  
+            <div class="rounded row g-0 bg-light overflow-hidden flex-md-row shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-red">YouTube</strong>
+                <h3 class="mb-0 lines-1">Чемпионат и Первенство Калининградской области</h3>
+                <div class="mb-1 text-muted">17.12.2024</div>
+                <p class="card-text mb-auto lines-2">Смотрите все выступления наших спортсменов</p>
+                <a href="https://www.youtube.com/@sports_acro39" target="_blank" class="text-blue">
+                  Смотреть на YouTube
+                </a>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <div
+                  style="background: center / cover url('https://sun9-52.userapi.com/s/v1/ig2/QWV1EVdsOWbDjx2fh55VYcoyIm418jM4cNfZULOXpvZp-AkYZVIll3S0RVWaShjlr6NeO0WT1gYP5_6K9KwqdRRI.jpg?quality=95&as=32x24,48x36,72x54,108x81,160x120,240x180,360x270,480x360,540x405,640x480,720x540,1080x810,1280x960,1440x1080,1600x1200&from=bu'); height: 250px; width: 200px;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.coach').forEach(element => {
+    element.innerHTML = element.innerHTML.replace(/&lt;br&gt;/g, '<br>');
+  });
+</script>
+{% endblock %}

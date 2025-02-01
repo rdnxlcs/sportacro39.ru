@@ -1,0 +1,275 @@
+@font-face {
+  font-family: TT Hoves Pro;
+  src: url('HovesPro.ttf');
+}
+
+html, body {
+  font-family: "TT Hoves Pro";
+  font-optical-sizing: auto;
+  font-style: normal;
+  background: #FFF8F0;
+  overflow-x: hidden;
+  background-color:hsla(31,100%,97%,1);
+  background-image:
+  radial-gradient(at 4% 79%, hsla(300,33%,44%,0.2) 0px, transparent 50%),
+  radial-gradient(at 89% 25%, hsla(232,80%,56%,0.2) 0px, transparent 50%),
+  radial-gradient(at 92% 54%, hsla(359,81%,60%,0.2) 0px, transparent 50%);
+}
+
+:root {
+  --bs-heading-color: #131112;
+}
+
+.ak47 {
+  position: relative;
+}
+
+.lines-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.lines-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.bg-dark {
+  background: #131112!important;
+}
+
+.bg-light {
+  background: #FFF8F0!important;
+}
+
+.border-light {
+  border-bottom: 1px solid #FFF8F0!important;
+}
+
+.text-light {
+  color: #FFF8F0!important;
+}
+
+.text-muted {
+  opacity: .5;
+}
+
+.btn {
+  border-radius: 16rem;
+  padding: .375rem 2.125rem .375rem 2.125rem;
+  transition: .3s;
+}
+
+.btn-light {
+  background: #FFF8F0;
+  color: #131112;
+  border: none;
+}
+
+.btn-light:hover {
+  background: #E0DAD3;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto, auto);
+  grid-gap: 1rem;
+}
+
+.photo-tall {
+  grid-row: span 1;
+}
+
+.photo-wide {
+  grid-column: span 3;
+}
+
+
+.media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-blue {
+  background: #3D54EB;
+  color: #FFF8F0;
+}
+
+.btn-blue:hover {
+  background: #364BD1;
+  color: #FFF8F0;
+}
+
+.navbar-toggler {
+  border: none
+}
+
+.nav-link {
+  color: #FFF8F0!important;
+}
+
+.double-nav {
+  border: none;
+  background: none;
+  mix-blend-mode: difference;
+}
+
+.blur {
+  height: 66px;
+  width: 100%;
+  background: none;
+  backdrop-filter: blur(1rem);
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  transition: height 0.3s ease;
+  -webkit-transition: height 0.5s ease;
+}
+
+.full {
+  height: 100vh;
+  padding-top: 66px;
+}
+
+.full-min {
+  min-height: 100vh;
+  padding-top: 66px;
+}
+
+.bg-blue {
+  background: #3D54EB;
+}
+
+.padding {
+  padding-top: 66px;
+}
+
+.border-bottom {
+  border-color: rgba(19, 17, 18, .5)!important;
+}
+
+.btn-outline-dark {
+  background: none!important;
+  border: 1px solid #131112!important;
+  color: #131112!important;
+}
+
+.btn-outline-dark:hover {
+  background: #131112!important;
+  border: 1px solid #131112!important;
+  color: #FFF8F0!important;
+}
+
+.btn-outline-light {
+  background: none!important;
+  border: 1px solid #FFF8F0!important;
+  color: #FFF8F0!important;
+}
+
+.btn-outline-light:hover {
+  background: #FFF8F0!important;
+  border: 1px solid #FFF8F0!important;
+  color: #131112!important;
+}
+
+.display-0 {
+  font-size: calc(1.625rem + 6vw);
+}
+
+.rounded-bottom {
+  border-radius: 0 0 2rem 2rem!important;
+}
+
+@media (max-width: 991px) {
+  .collapse-bg {
+    background: center right / contain no-repeat url('mainonly.png');
+  } 
+  .alignment {
+    height: 54vw;
+  }
+  .bg-clip span {
+    margin-left: calc(1.625rem / 2);
+  }
+  .img-coach {
+    display: none;
+  }
+  .display-0 {
+    font-size: calc(1.225rem + 6vw);
+  }
+}
+
+@media (min-width: 992px) {
+  .alignment {
+    height: 28vw;
+  }
+  .bg-clip span {
+    margin-left: calc(2.5rem / 2);
+  }
+  .bg-coach {
+    background: none!important;
+  }
+  .bg-dark-coach {
+    background-image: none!important;
+  }
+  .display-0 {
+    font-size: calc(1.625rem + 6vw);
+  }
+}
+
+.bg-clip {
+  position: relative;
+  top: calc(1.225rem + 6vw + 3rem);
+}
+
+.navbar-btn {
+  background: none;
+  border: none;
+}
+
+.bg-grad {
+  background-color:hsla(31,100%,97%,1);
+  background-image:
+  radial-gradient(at 4% 79%, hsla(300,33%,44%,0.2) 0px, transparent 50%),
+  radial-gradient(at 89% 25%, hsla(232,80%,56%,0.2) 0px, transparent 50%),
+  radial-gradient(at 92% 54%, hsla(359,81%,60%,0.2) 0px, transparent 50%);
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-clip span {
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-color:hsla(31,100%,97%,1);
+  background-image:
+  radial-gradient(at 4% 79%, hsla(300,33%,44%,0.2) 0px, transparent 50%),
+  radial-gradient(at 89% 25%, hsla(232,80%,56%,0.2) 0px, transparent 50%),
+  radial-gradient(at 92% 54%, hsla(359,81%,60%,0.2) 0px, transparent 50%);
+  background-size: cover;
+  background-position: center;
+}
+
+.rounded {
+  border-radius: 1rem!important;
+}
+
+.text-red {
+  color: #F44344;
+}
+
+.text-blue {
+  color: #3D54EB;
+}
+
+.carde {
+  border: 1px solid #fffbfc;
+  backdrop-filter: blur(.25rem);
+  border-radius: 1.5rem;
+  padding: 1.25rem;
+}

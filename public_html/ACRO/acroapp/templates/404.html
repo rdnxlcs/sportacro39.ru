@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid d-flex align-items-center full-min bg-dark">
+  <div class="px-3 px-lg-5 py-5 h-100 w-100">
+    <div class="row h-100 ">
+      <div class="col-12 col-lg-8 py-3 collapse-bg d-flex flex-column justify-content-center" style="z-index: 1;">
+        <div class="h-100"></div>
+        <div class="d-flex mb-4">
+          <a href="/" class="btn btn-light">Перейти на главную</a>
+        </div>
+        <h1 class="display-0 text-light lh-1 fw-semibold mb-4 text-nowrap">Кажется,<br>такой страницы<br>не существует</h1>
+      </div>
+      <div class="col-12 col-lg-4" style="z-index: 0;">
+        <div class="h-100 w-100 rounded" style="background: top / cover url('static/main.png');">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

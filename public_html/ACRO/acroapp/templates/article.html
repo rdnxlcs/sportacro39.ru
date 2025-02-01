@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="padding px-3">
+  <main class="container py-5">
+    <div class="row g-5">
+      <div class="col-md-8">
+        <article class="blog-post mb-5">
+          <h2 class="">
+            {{ current_article.title }}
+          </h2>
+          <p class="blog-post-meta text-muted">{{ current_article.date }}</p>
+          <hr>
+          <p class="post-text">{{ current_article.text|safe }}</p>
+          <div class="">
+            <div class="photo-grid">
+              {% for attachment in current_article.photos %}
+              <img src="{{ attachment }}" class="rounded media">
+              {% endfor %}
+            </div>
+          </div>
+        </article>
+        <div class="py-5">
+          <a class="btn btn-blue m-2" href="/wall">Все новости</a>
+          <a class="btn btn-outline-dark m-2" aria-disabled="true">Календарь соревнований</a>
+        </div>
+
+      </div>
+
+      <div class="col-md-4">
+        <div class="position-sticky" style="top: 80px;">
+          <a href="/ms" class="text-decoration-none">
+            <div class="p-4 mb-3 bg-blue rounded">
+              <h4 class="text-light">Мастера спорта</h4>
+              <p class="text-light mb-0">Актуальный список мастеров спорта России по спортивной акробатике в
+                калининградской области</p>
+            </div>
+          </a>
+          <div>
+            <h3 class="">Недавние новости</h3>
+            <ul class="list-unstyled">
+              {% for post in last %}
+              <li>
+                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none"
+                  href="#">
+                  {% for photo in post.photos %}
+                  {% if forloop.counter == 1 %}
+                  <div class="w-100 rounded" style="height: 96px; background: center / cover url('{{ photo }}');"></div>
+                  {% endif %}
+                  {% endfor %}
+                  {% if post.cover %}
+                  <div class="w-100 rounded" style="height: 96px; background: center / cover url('{{ post.cover }}');">
+                  </div>
+                  {% endif %}
+                  <div class="col-lg-8">
+                    <h6 class="mb-0">{{ post.title }}</h6>
+                    <small class="text-muted">{{ post.date|date:"d.m.Y" }}</small>
+                  </div>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="p-4">
+            <h4 class="">Все статьи</h4>
+            <ol class="list-unstyled mb-0">
+              {% for article in articles %}
+              <li class="mb-3"><a class="text-blue" href="/article/{{ article.art }}">{{ article.title }}</a></li>
+              {% endfor %}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  document.querySelectorAll('.post-text').forEach(element => {
+    element.innerHTML = element.innerHTML.replace(/&lt;br&gt;/g, '<br>');
+  });
+
+  $('.slider').slick({
+    centerMode: true,
+    centerPadding: '',
+    slidesToShow: 1,
+    variableWidth: true,
+    autoplay: false,
+    //autoplaySpeed: 2500,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1044,
+        settings: {
+          arrows: false,
+          centerMode: true,
+          centerPadding: '',
+          variableWidth: true,
+          slidesToShow: 1
+        }
+      }
+    ]
+  });
+  const getMeta = (url, cb) => {
+    const img = new Image();
+    img.onload = () => cb(null, img);
+    img.onerror = (err) => cb(err);
+    img.src = url;
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    // Создаем массив промисов для каждого изображения
+    const imagePromises = [];
+
+    // Для каждого изображения с классом .media
+    document.querySelectorAll('.media').forEach(element => {
+      const imagePromise = new Promise((resolve, reject) => {
+        element.onload = function () {
+          const w = element.naturalWidth;
+          const h = element.naturalHeight;
+          console.log(w, h);
+
+          if (w > h) {
+            element.classList.add('photo-wide');
+          } else if (w <= h) {
+            element.classList.add('photo-tall');
+          }
+          resolve();  // Завершаем промис, когда изображение загружено
+        };
+
+        element.onerror = function () {
+          reject('Ошибка загрузки изображения');  // Обработка ошибок
+        };
+
+        // Если изображение уже загружено, сразу вызываем onload
+        if (element.complete) {
+          element.onload();
+        }
+      });
+
+      // Добавляем промис в массив
+      imagePromises.push(imagePromise);
+    });
+
+    // Ждем, пока все изображения загрузятся и получат классы
+    Promise.all(imagePromises).then(() => {
+      // После того как все изображения получили свои классы, выполняем сортировку
+      const photoGrids = document.querySelectorAll('.photo-grid');
+
+      photoGrids.forEach(photoGrid => {
+        const photos = Array.from(photoGrid.querySelectorAll('.media'));
+
+        // Разделяем фотографии по классам
+        const widePhotos = photos.filter(photo => photo.classList.contains('photo-wide'));
+        const tallPhotos = photos.filter(photo => photo.classList.contains('photo-tall'));
+        const otherPhotos = photos.filter(photo => !photo.classList.contains('photo-wide') && !photo.classList.contains('photo-tall'));
+
+        // Очистка контейнера перед добавлением отсортированных элементов
+        photoGrid.innerHTML = '';
+
+        // Добавляем сначала фото с классом .photo-wide, затем .photo-tall и затем остальные
+        widePhotos.forEach(photo => photoGrid.appendChild(photo));
+        tallPhotos.forEach(photo => photoGrid.appendChild(photo));
+        otherPhotos.forEach(photo => photoGrid.appendChild(photo));
+      });
+
+      console.log('Все изображения отсортированы');
+    }).catch((error) => {
+      console.error(error);
+    });
+  });
+</script>
+{% endblock %}
